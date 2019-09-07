@@ -1,0 +1,102 @@
+using System;
+using System.IO;
+using System.Linq;
+
+namespace ConsoleApp6
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            String[] encryptionDatabase = {
+            "nthing",
+            "dydOX8v6ZQWhXcgOBZXh",
+            "suVOw9GArWHt8mWwsOAP",
+            "K0syb6P7Sp19TMIqgZet",
+            "Zc3sZTvjxoXeBBuBpshS",
+            "Febtl1OlPNqx47NDan54",
+            "RNdIce6cirM3k45QV2fQ",
+            "USv5Y5TTXoBzQ5KSBnHE",
+            "kJlhTv9i1dqRn296EMiC",
+            "5jm4qn6rrnhxpthsfqfu",
+            "7ugq0GV8yrkbmc8msIYK",
+            "zoV16jdjsg0DSMTZ0pEK",
+            "EON5Nq0XNYT3a5V1SbcE",
+            "MA7H6JAsqZBvG2bXS6RO",
+            "PJu8sZt4yLGPuy0OrRCg",
+            "YQKRCobE19nEMJMnnikj",
+            "4mJzkEWA3hbk5x8YeM6A",
+            "QRHJqUfJWcZhEjMk27gi",
+            "tAPphY4Iq19kShZeZkA0",
+            "33lfZPaTSRq6eCMs7xa7",
+            "tj1kjhUlKrrCuuMu4rb5",
+            "kgRYM2QrFaQoR3vj6fLj",
+            "Cpq3k5VzKRZmxheDwFIe",
+            "h2Y9kfmEx9riSNm7RoTX",
+            "HVhhz7MDkseZCwoIISqG",
+            "luc0QJUwOsgLMTcq53bH",
+            "nRHRQid2cOIzRelnvjSg"
+
+
+            };
+            String[] abc = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+            Console.WriteLine("Warning! If you didn't open this .exe file as administrator, consider doing so, to avoid security problems.");
+            Console.WriteLine("Would you like to 1) Encrypt something or 2) Decrypt something?");
+            String s = Console.ReadLine();
+            if (s=="1")
+            {
+                Console.WriteLine("What do you want to encrypt? Write all the words! (Note: The speed depends on your CPU. Each character will get replaced with a 20 characters long randomly generated string. The app may freeze.)");
+                String encrypt = Console.ReadLine().ToLower();
+                String longg = "";
+                //Here's the hard part. Okay. LETS DO THIS. We want to loop through each character, then add the encrypted version to a string. At the end, we will get our long string.
+                for (int i = 0; i < encrypt.Length; i++)
+                {
+                    //Replace each character.
+                    if (encrypt[i]==' ')
+                    {
+                        longg += " ";
+                    } else if (abc.Contains(encrypt[i].ToString()))
+                    {
+                        int j = Array.IndexOf(abc, encrypt[i].ToString());
+                        longg += encryptionDatabase[j+1];
+                    } else
+                    {
+                        longg += encrypt[i];
+                    }
+                }
+                Console.WriteLine("All character has been successfully encrypted. We're copying the string to your C: drive, 95t8fdj3fsm4u.txt file.");
+                File.AppendAllText("C:/95t8fdj3fsm4u.txt", longg);
+                Console.WriteLine("File writing done!");
+                Console.ReadKey();
+                Environment.Exit(0);
+            } else if (s=="2")
+            {
+                //Decrypt, well...
+                Console.WriteLine("Okay. So, in case you have copied the long, encrypted string, we ask you to create a .txt file, paste the text into it, save, then tell us the path to the txt file.");
+                String path = Console.ReadLine();
+                if (File.Exists(path))
+                {
+                    Console.WriteLine("Great! So I'm assuming that the encrypted text is in the .txt file. The decrypting takes less time than encrypting.");
+                    String lines = File.ReadAllText(path);
+                    Console.WriteLine("Got the text.. Now here comes the decrypting.");
+                    for (int i = 1; i < 27; i++)
+                    {
+                        lines = lines.Replace(encryptionDatabase[i], abc[i - 1]);
+                    }
+                    Console.WriteLine("Decrypted. Generating file to C:/fjse3its3mg.txt");
+                    File.AppendAllText("C:/fjse3its3mg.txt", lines);
+                    Console.WriteLine("Done! Thanks for using!");
+                } else
+                {
+                    Console.WriteLine("Sorry.. The file doesn't exists.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+            } else
+            {
+                Console.WriteLine("Uh... So far so bad. I wrote 1) and 2), what do you think, what you have to write? Let me help you, 1 or 2. I hope the program itself will work for you!");
+            }
+            Console.ReadKey();
+        }
+    }
+}
